@@ -966,6 +966,42 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void))
     return @(_pdfController.configuration.pageGrabberEnabled);
 }
 
+- (void)setPageLabelEnabledForPSPDFViewControllerWithJSON:(NSNumber *)pageLabelEnabled
+{
+    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
+        builder.pageLabelEnabled = pageLabelEnabled.boolValue;
+    }];
+}
+
+- (NSNumber *)pageLabelEnabledAsJSON
+{
+    return @(_pdfController.configuration.pageLabelEnabled);
+}
+
+- (void)setDocumentLabelEnabledForPSPDFViewControllerWithJSON:(NSNumber *)documentLabelEnabled
+{
+    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
+        builder.documentLabelEnabled = documentLabelEnabled.boolValue;
+    }];
+}
+
+- (NSNumber *)documentLabelEnabledAsJSON
+{
+    return @(_pdfController.configuration.documentLabelEnabled);
+}
+
+- (void)setBarButtonItemsAlwaysEnabledForPSPDFViewControllerWithJSON:(NSNumber *)barButtonItemsAlwaysEnabled
+{
+    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
+        builder.barButtonItemsAlwaysEnabled = barButtonItemsAlwaysEnabled.boolValue;
+    }];
+}
+
+- (NSNumber *)barButtonItemsAlwaysEnabledAsJSON
+{
+    return @(_pdfController.configuration.barButtonItemsAlwaysEnabled);
+}
+
 #pragma mark PDFProcessing methods
 
 - (void)convertPDFFromHTMLString:(CDVInvokedUrlCommand *)command
