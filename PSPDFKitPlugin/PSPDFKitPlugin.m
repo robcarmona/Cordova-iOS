@@ -990,16 +990,11 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void))
     return @(_pdfController.configuration.documentLabelEnabled);
 }
 
-- (void)setBarButtonItemsAlwaysEnabledForPSPDFViewControllerWithJSON:(NSNumber *)barButtonItemsAlwaysEnabled
+- (void)setToolsEnabledForPSPDFViewControllerWithJSON:(NSNumber *)toolsEnabled
 {
-    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
-        builder.barButtonItemsAlwaysEnabled = barButtonItemsAlwaysEnabled.boolValue;
-    }];
-}
-
-- (NSNumber *)barButtonItemsAlwaysEnabledAsJSON
-{
-    return @(_pdfController.configuration.barButtonItemsAlwaysEnabled);
+    if (!toolsEnabled.boolValue) {
+        [_pdfController.navigationItem setRightBarButtonItems:@[] forViewMode:PSPDFViewModeDocument animated:NO];
+    }
 }
 
 #pragma mark PDFProcessing methods
